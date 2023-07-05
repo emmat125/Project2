@@ -10,7 +10,23 @@ module.exports.findAllFilms = async function () {
         const db = client.db(dbName);
         const collection = db.collection("films");
         const data = await collection.find().toArray();
-        console.log("Data from data_acess:" + data[1].producer)
+
+        console.log("Data retrived successfully")
+        return data;
+    } catch (err) {
+        console.error("Error retrieving data", err);
+        throw err;
+    }
+}
+
+module.exports.findAllPlanets = async function () {
+    try {
+        const client = new MongoClient(url);
+        await client.connect();
+
+        const db = client.db(dbName);
+        const collection = db.collection("planets");
+        const data = await collection.find().toArray();
 
         console.log("Data retrived successfully")
         return data;
