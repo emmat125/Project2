@@ -43,6 +43,22 @@ app.get('/api/planets/:id', async (req, res) => {
     }
 })
 
+app.get('/api/characters', async (req, res) => {
+    const data = await dao.findAllCharacters();
+    res.send(data)
+    // res.send({ test: 'fake test' });
+})
+
+app.get('/api/characters/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = await dao.findCharacter(id);
+        res.send(data)
+    } catch (err) {
+        console.error("Error retrieving data: ", err);
+        res.sendStatus(500);
+    }
+})
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 })
