@@ -14,7 +14,7 @@ module.exports.findAllFilms = async function () {
         console.log("Data retrived successfully")
         return data;
     } catch (err) {
-        console.error("Error retrieving data", err);
+        console.error("Error retrieving data: ", err);
         throw err;
     }
 }
@@ -31,7 +31,24 @@ module.exports.findAllPlanets = async function () {
         console.log("Data retrived successfully")
         return data;
     } catch (err) {
-        console.error("Error retrieving data", err);
+        console.error("Error retrieving data: ", err);
+        throw err;
+    }
+}
+
+module.exports.findPlanet = async function (id) {
+    try {
+        const client = new MongoClient(url);
+        await client.connect();
+
+        const db = client.db(dbName);
+        const collection = db.collection("planets");
+        const data = await collection.findOne({ id: +id });
+
+        console.log("Data retrived successfully")
+        return data;
+    } catch (err) {
+        console.error("Error retrieving data: ", err);
         throw err;
     }
 }

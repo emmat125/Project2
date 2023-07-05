@@ -7,8 +7,8 @@ app.get('/', (req, res) => {
     try {
         res.send('Hellooo World');
     } catch (err) {
-        console.log("Error retrieving data: ", err);
-        throw err;
+        console.error("Error retrieving data: ", err);
+        res.sendStatus(500);
     }
 })
 
@@ -17,8 +17,8 @@ app.get('/api/films', async (req, res) => {
         const data = await dao.findAllFilms();
         res.send(data)
     } catch (err) {
-        console.log("Error retrieving data: ", err);
-        throw err;
+        console.error("Error retrieving data: ", err);
+        res.sendStatus(500);
     }
 })
 
@@ -27,8 +27,19 @@ app.get('/api/planets', async (req, res) => {
         const data = await dao.findAllPlanets();
         res.send(data)
     } catch (err) {
-        console.log("Error retrieving data: ", err);
-        throw err;
+        console.error("Error retrieving data: ", err);
+        res.sendStatus(500);
+    }
+})
+
+app.get('/api/planets/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = await dao.findPlanet(id);
+        res.send(data)
+    } catch (err) {
+        console.error("Error retrieving data: ", err);
+        res.sendStatus(500);
     }
 })
 
