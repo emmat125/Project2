@@ -1,28 +1,21 @@
-const { MongoClient } = require('mongodb');
-var url = "mongodb://localhost:27017";
-const client = new MongoClient(url);
+const { MongoClient } = require("mongodb");
+const url = 'mongodb://localhost:27017';
+const dbName = 'swapi';
 
-const dbName = "swapi_db";
-const filmsCollection = "films";
+module.exports.findAllFilms = async function () {
+    try {
+        const client = new MongoClient(url);
+        await client.connect();
 
-module.exports.call = async function call(operation, parameters, callback) {
+        const db = client.db(dbName);
+        const collection = db.collection("films");
+        const data = await collection.find().toArray();
+        console.log("Data from data_acess:" + data[1].producer)
 
-    await client.connect();
-    const db = client.db(dbName);
-    const collection = db.collection(filmsCollection);
-
-    switch (operation.toLowerCase()) {
-        case 'findAllFilms':
-            const films = await collection.find({}).toArray();
-            console.log(films)
-            callback({ films: films });
-            break;
-
-        default:
-            break;
+        console.log("Data retrived successfully")
+        return data;
+    } catch (err) {
+        console.error("Error retrieving data", err);
+        throw err;
     }
-
-    console.log('call complete: ' + operation);
-    client.close();
-    return 'call complete';
 }
