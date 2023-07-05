@@ -22,6 +22,17 @@ app.get('/api/films', async (req, res) => {
     }
 })
 
+app.get('/api/films/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = await dao.findFilm(id);
+        res.send(data)
+    } catch (err) {
+        console.error("Error retrieving data: ", err);
+        res.sendStatus(500);
+    }
+})
+
 app.get('/api/planets', async (req, res) => {
     try {
         const data = await dao.findAllPlanets();
