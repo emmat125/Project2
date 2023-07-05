@@ -1,23 +1,16 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-var dao = require('./data_acess');
-var app = express(); // server app
-var port = 4000; // port
-app.use(bodyParser.json()); // Parse JSON body
+const dao = require('./data_acess');
+const app = express(); // server app
+const port = 4000; // port
 
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.send('Hellooo World');
 })
 
-app.get('/api/films', (req, res) => {
-    dao.call('findAllFilms', {}, (result) => {
-        if (result.films !== undefined) {
-            res.send(result.films[0]);
-        } else {
-            res.statusCode = 404;
-            res.end();
-        }
-    });
+app.get('/api/films', async (req, res) => {
+    const data = await dao.findAllFilms();
+    console.log("Data index.js:" + data)
+    res.send(data)
     // res.send({ test: 'fake test' });
 })
 
