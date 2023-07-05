@@ -52,3 +52,38 @@ module.exports.findPlanet = async function (id) {
         throw err;
     }
 }
+
+module.exports.findAllCharacters = async function () {
+    try {
+        const client = new MongoClient(url);
+        await client.connect();
+
+        const db = client.db(dbName);
+        const collection = db.collection("characters");
+        const data = await collection.find().toArray();
+
+        console.log("Data retrived successfully")
+        return data;
+    } catch (err) {
+        console.error("Error retrieving data", err);
+        throw err;
+    }
+}
+
+
+module.exports.findCharacter = async function (id) {
+    try {
+        const client = new MongoClient(url);
+        await client.connect();
+
+        const db = client.db(dbName);
+        const collection = db.collection("characters");
+        const data = await collection.findOne({ id: +id });
+
+        console.log("Data retrived successfully")
+        return data;
+    } catch (err) {
+        console.error("Error retrieving data: ", err);
+        throw err;
+    }
+}
