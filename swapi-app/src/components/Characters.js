@@ -14,7 +14,7 @@ function Characters() {
 
     return (
         <div>
-            <h2>Characters</h2>
+            <h2 className={'header2'}>Characters</h2>
             <ul>
                 {characters.map((character) => (
                     <li key={character.id} className={'li-style'}> {character.name} </li>

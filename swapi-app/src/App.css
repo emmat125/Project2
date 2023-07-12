@@ -32,6 +32,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -41,12 +42,12 @@
   display: flex;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #838383;
   transition: background-color 0.3s ease;
 }
 
 .li-style:hover {
-  background-color: #f5f5f5;
+  background-color: #ffdddd;
 }
 
 .li-style:last-child {
@@ -58,6 +59,24 @@
 }
 
 .li-style {
-  font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
   color: #333333;
+}
+
+.header1 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 30px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 26.4px;
+}
+
+.header2 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 26.4px;
 }
